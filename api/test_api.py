@@ -1,6 +1,6 @@
 from db import init_db, Player, db_connection_ctx
 from sqlalchemy import and_
-from endpoints import app, get_filters
+from endpoints import app
 
 
 def test_model():
@@ -24,10 +24,3 @@ def test_players_by_attribute():
     resp = test_app.get("/stats", query_string=by_division)
     assert resp.json.get("payload").get("stats")[0]["AB"] == "0"
 
-
-def test_filters():
-    init_db()
-    divisions, years, teams = get_filters()
-    assert divisions[0] == "NL"
-    assert years[0] == 2000
-    assert teams[0] == "CHN"

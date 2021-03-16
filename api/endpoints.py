@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
 from api.db import PlayerSchema, db_connection_ctx, Player
+from api.services import to_list
 
 import logging
 
-from api.services import get_stats_with_filter, get_filters, to_list
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)

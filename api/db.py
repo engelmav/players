@@ -1,8 +1,8 @@
 import sqlite3
 from marshmallow_sqlalchemy import ModelSchema
-from sqlalchemy import create_engine, Column, String, Integer
+from sqlalchemy import create_engine, Column, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import sessionmaker
 import pandas as pd
 
 
