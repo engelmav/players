@@ -1,34 +1,50 @@
-import { FormControl, InputLabel, Select } from "@material-ui/core";
-import React, { useState } from "react";
+import { FormControl, InputLabel, makeStyles, Select } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 400,
+    paddingRight: 400
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 type Props = {
   options: string[];
   label: string;
-}
-const Dropdown = ({ options, label }: Props) => {
-
+  filterId: string;
+  onSelectItem: Function
+};
+const Dropdown = ({ options, label, onSelectItem, filterId }: Props) => {
+  const classes = useStyles();
   const [value, setValue] = useState("All");
+  const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
+    setValue(event.target.value);
+    onSelectItem(filterId, event.target.value)
+  };
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    console.log(event.target.value)
-    setValue(event.target.value as string);
-  }
+  useEffect(() => {}, []);
 
   return (
-    <FormControl>
-      <InputLabel htmlFor="native-simple">{label}</InputLabel>
+    <FormControl margin="normal" className={classes.formControl}>
+      <InputLabel htmlFor="native-simple">
+        {label}
+      </InputLabel>
       <Select
         native
         value={value}
         onChange={handleChange}
-        inputProps={{
-          name: "age",
-          id: "native-simple",
-        }}
+
       >
-        <option aria-label="All" value="All" />
-        {options.map((o, index) => <option value={index}>{o}</option>)}
+        <option aria-label="All" value="All">
+          {"All"}
+        </option>
+        {options.map((o, idx) => (
+          <option key={idx} value={o}>{o}</option>
+        ))}
       </Select>
     </FormControl>
   );

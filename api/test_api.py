@@ -20,17 +20,9 @@ def test_players_by_attribute():
     test_app = app.test_client()
 
     by_division = {"lg_id": "NL"}
-    by_year = {"year_id": "2008"}
-    by_team = {"team_id": "DET"}
 
-    query_strings = [
-        by_division,
-        by_year,
-        by_team
-    ]
-
-    resp = test_app.get("/players", query_string=by_division)
-    assert resp.json.get("payload")[0]["AB"] == "0"
+    resp = test_app.get("/stats", query_string=by_division)
+    assert resp.json.get("payload").get("stats")[0]["AB"] == "0"
 
 
 def test_filters():

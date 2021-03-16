@@ -6,7 +6,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 import pandas as pd
 
 
-DB_NAME = "players.db"
+DB_NAME = "stats.db"
 
 
 def get_connection():
@@ -40,7 +40,6 @@ Base = declarative_base()
 
 
 class Player(Base):
-    # playerID,yearID,stint,teamID,lgID,G,AB,R,H,2B,3B,HR,RBI,SB,CS,BB,SO,IBB,HBP,SH,SF,GIDP
     __tablename__ = "players"
     player_id = Column("playerID", String(), primary_key=True,)
     year_id = Column("yearID", String())
